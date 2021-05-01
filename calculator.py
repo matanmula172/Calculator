@@ -39,6 +39,8 @@ class Calculator:
 
         # Clicking this button will set total_label_text to log(total_label_text)
         self.ln_ans_button = Button(master, text="ln(ANS)", command=lambda: self.set_total_label("log"))
+        # Clicking this button will set total_label_text to e^(total_label_text)
+        self.e_power_ans_button = Button(master, text="e^(ANS)", command=lambda: self.set_total_label("e_power"))
 
         # All these buttons add the matching action to the input entry
         self.plus_button = Button(master, text="+", command=lambda: self.add_action_to_entry("+"))
@@ -57,6 +59,7 @@ class Calculator:
 
         self.equal_button.grid(row=2, column=3)
         self.ln_ans_button.grid(row=2, column=2)
+        self.e_power_ans_button.grid(row=2, column=1)
 
         self.plus_button.grid(row=3, column=0)
         self.subtract_button.grid(row=3, column=1)
@@ -84,6 +87,10 @@ class Calculator:
                 self.total_label_text.set(str(self.total))
             else:
                 self.total_label_text.set("Incorrect math expression")
+        elif method == 'e_power':
+            if self.total_label_text.get() != "Incorrect math expression":
+                self.total = math.exp(float(self.total_label_text.get()))
+                self.total_label_text.set(str(self.total))
         elif method == 'reset':
             self.total_label_text.set('0')
         self.entry.delete(0, END)
