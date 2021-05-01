@@ -1,7 +1,6 @@
 import math
 from tkinter import Tk, Label, Button, Entry, IntVar, END, W, E, StringVar, ttk
 from tkinter.ttk import *
-
 import expressionparse
 
 
