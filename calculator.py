@@ -27,6 +27,7 @@ class Calculator:
 
         # the input entry
         self.entry_text = StringVar()
+        self.entry_text.set('0')
         self.entry = Entry(master, textvariable=self.entry_text)
 
         # button for each action
@@ -34,7 +35,7 @@ class Calculator:
         self.equal_button = Button(master, text="=", command=lambda: self.set_total_label("equal"))
         # Resets the total_label_text and the input entry
         self.reset_button = Button(master, text="Reset", command=lambda: self.set_total_label("reset"))
-        # Copies the total_label_text to the input entry
+        # Adds the total_label_text to the input entry
         self.ans_button = Button(master, text="ANS", command=lambda: self.write_answer_to_entry())
 
         # Clicking this button will set total_label_text to log(total_label_text)
@@ -93,12 +94,13 @@ class Calculator:
                 self.total_label_text.set(str(self.total))
         elif method == 'reset':
             self.total_label_text.set('0')
-        self.entry.delete(0, END)
 
-    # This function writes the content in total_label_text to the input entry
+        self.entry_text.set('0')
+
+    # This function adds the content in total_label_text to the input entry
     def write_answer_to_entry(self):
         if self.total_label_text.get() != "Incorrect math expression":
-            self.entry_text.set(self.total_label_text.get())
+            self.entry_text.set(self.entry_text.get()+self.total_label_text.get())
             self.entry.icursor(END)
 
     # This function adds the matching action to the input entry
